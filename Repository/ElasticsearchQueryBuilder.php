@@ -1,5 +1,6 @@
 <?php
-class ElasticsearchQueryBuilder implements  QueryBuilder
+
+class ElasticsearchQueryBuilder implements QueryBuilder
 {
     private Query $query;
 

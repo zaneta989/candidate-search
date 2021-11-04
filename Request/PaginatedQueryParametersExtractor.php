@@ -6,8 +6,8 @@ class PaginatedQueryParametersExtractor
 {
     public function extractFromRequest(RequestInterface $request): PaginatedQueryParameters
     {
-        $page = (int) $request->getQuery('page', 1);
-        $itemsPerPage = (int) $request->getQuery('itemsPerPage', 20);
+        $page = (int)$request->getQuery('page', 1);
+        $itemsPerPage = (int)$request->getQuery('itemsPerPage', 20);
         $orderFilters = $request->getQuery('order', []);
         $searchFilters = $request->getQuery('search', []);
 

@@ -2,25 +2,25 @@
 
 class SearchController
 {
-    private CandidateSearcher $searcher;
+    private QueryBus $queryBus;
     private PaginatedQueryParametersExtractor $extractor;
     private SerializerInterface $serializer;
 
     public function __construct(
-        CandidateSearcher $searcher,
+        QueryBus $queryBus,
         PaginatedQueryParametersExtractor $extractor,
         SerializerInterface $serializer
     ) {
-        $this->searcher = $searcher;
         $this->extractor = $extractor;
         $this->serializer = $serializer;
+        $this->queryBus = $queryBus;
     }
 
     public function search(RequestInterface $request): ResponseInterface
     {
         try {
             return ResponseInterface::create(
-                $this->serializer->serialize($this->searcher->search($this->extractor->extractFromRequest($request))),
+                $this->serializer->serialize($this->queryBus->handle(new CandidateQuery($this->extractor->extractFromRequest($request)))),
                 200
             );
         } catch (PaginatedQueryParametersException $exception) {

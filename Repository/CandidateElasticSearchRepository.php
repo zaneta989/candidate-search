@@ -35,7 +35,8 @@ class CandidateElasticSearchRepository implements CandidateRepository
         return new ReadModelCollection(
             $paginatedQueryParameters->getItemsPerPage(),
             new CandidateCollection(array_map(
-                fn(array $item) => new Candidate($item['firstName'], $item['lastName'], $item['email'], $item['tags'], $item['notes']),
+                fn(array $item) => new Candidate($item['firstName'], $item['lastName'], $item['email'], $item['tags'],
+                    $item['notes']),
                 $result
             )));
     }
